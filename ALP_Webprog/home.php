@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body class="bg-[#F6E7F1]">
-    <header class="absolute w-full bg-[#DEBBD9]">
+<header class="absolute w-full bg-[#DEBBD9]">
         <nav>
         <div class="flex justify-between items-center p-2  md:pl-24 md:pr-24">
             <!-- Mobile Menu Button -->
@@ -143,11 +143,42 @@
         </nav>
     </header>
 
-    <main>
-        <section class="pt-32 px-24">
-            <div class="container grid grid-cols-1 md:grid-cols-3 gap-7">
+    <main class="px-24">
+        <section class="pt-24 lg:pt-28 px-4">
+            <div id="default-carousel" class="relative w-full lg:px-56" data-carousel="slide">
+                <!-- Carousel wrapper -->
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                     <!-- Item 1 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="https://i.ibb.co.com/pRHnHSG/carousel-banner-1.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="https://i.ibb.co.com/HN0qSFG/carousel-banner-2.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carousel Animation -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+        <section class="pt-16 lg:pt-28 px-4 lg:px-24">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-7">
                 <!-- card start -->
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
                     <div class="hover-img">
                         <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
                         <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
@@ -160,7 +191,7 @@
                     </div>
                 </div>
                 <!-- card end -->
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
                     <div class="hover-img">
                         <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
                         <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
@@ -172,7 +203,7 @@
                         <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
                     </div>
                 </div>
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
                     <div class="hover-img">
                         <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
                         <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
@@ -184,7 +215,7 @@
                         <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
                     </div>
                 </div>
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
                     <div class="hover-img">
                         <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
                         <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
@@ -196,7 +227,7 @@
                         <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
                     </div>
                 </div>
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
                     <div class="hover-img">
                         <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
                         <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
@@ -208,7 +239,7 @@
                         <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
                     </div>
                 </div>
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
                     <div class="hover-img">
                         <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
                         <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
@@ -220,7 +251,7 @@
                         <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
                     </div>
                 </div>
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
                     <div class="hover-img">
                         <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
                         <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
@@ -232,7 +263,7 @@
                         <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
                     </div>
                 </div>
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
                     <div class="hover-img">
                         <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
                         <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
@@ -244,7 +275,8 @@
                         <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
                     </div>
                 </div>
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                <div class="w-full"></div>
+                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
                     <div class="hover-img">
                         <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
                         <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
@@ -256,7 +288,7 @@
                         <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
                     </div>
                 </div>
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
                     <div class="hover-img">
                         <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
                         <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
@@ -268,6 +300,7 @@
                         <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
                     </div>
                 </div>
+                <div class="w-full"></div>
             </div>
         </section>
     </main>
@@ -283,7 +316,7 @@
 
         <div class="container mt-14 text-[#DEBBD9]">
             <div class="grid grid-cols-1 lg:grid-cols-3">
-                <div class="flex flex-wrap mx-auto lg:align-left mb-10">
+                <div class="flex flex-wrap mx-auto lg:align-left mb-2">
                     <a href="#"><ion-icon name="logo-instagram" class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
                     <a href="#"><ion-icon name="logo-facebook" class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
                     <a href="#"><ion-icon name="mail-outline" class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
