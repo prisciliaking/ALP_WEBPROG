@@ -35,11 +35,12 @@
             </div>
             <!-- Cart Icon -->
             <div class="flex items-center space-x-4 md:hidden pr-4">
+                <a href="keranjang.php">
                 <div class="md:hover:text-violet-900 md:hover:scale-105 md:transition-transform md:cursor-pointer">
                     <span class="material-symbols-outlined text-3xl">shopping_cart</span>
                 </div>
+                </a>
             </div>
-            <!-- Navbar Title (hidden on mobile) -->
             <!-- Profile and Cart Icons (hidden on mobile) -->
             <div class="hidden md:flex navbar-icon space-x-12">
                 <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer" id="cartIcon">
@@ -52,12 +53,14 @@
                         </a>
                     </div>
                 </div>
-                <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer" id="cartIcon">
+               <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer" id="cartIcon">
                     <div class="font-semibold text-xl">
+                        <a href="keranjang.php">
                         <div class="flex items-center space-x-2">
                             <span class="material-symbols-outlined text-3xl">shopping_cart</span>
                             <h1>My Cart</h1>
                         </div>
+                        </a>
                     </div>
                 </div>
                 <div class="relative" id="profileMenuContainer">
