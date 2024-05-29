@@ -141,80 +141,130 @@
     </header>
 
     <main>
-        <section class="pt-32 px-4">
-            <div class="container">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <section class="pt-32 px-24">
+            <div class="container grid grid-cols-1 md:grid-cols-3 gap-7">
+                <!-- card start -->
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                    <div class="hover-img">
+                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                            Add to cart
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
+                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
+                    </div>
+                </div>
+                <!-- card end -->
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                    <div class="hover-img">
+                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                            Add to cart
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
+                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
+                    </div>
+                </div>
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                    <div class="hover-img">
+                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                            Add to cart
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
+                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
+                    </div>
+                </div>
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                    <div class="hover-img">
+                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                            Add to cart
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
+                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
+                    </div>
+                </div>
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                    <div class="hover-img">
+                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                            Add to cart
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
+                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
+                    </div>
+                </div>
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                    <div class="hover-img">
+                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                            Add to cart
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
+                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
+                    </div>
+                </div>
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                    <div class="hover-img">
+                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                            Add to cart
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
+                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
+                    </div>
+                </div>
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                    <div class="hover-img">
+                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                            Add to cart
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
+                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
+                    </div>
+                </div>
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                    <div class="hover-img">
+                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                            Add to cart
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
+                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
+                    </div>
+                </div>
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                    <div class="hover-img">
+                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                            Add to cart
+                        </button>
+                    </div>
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
+                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -240,7 +290,7 @@
                         <img src="https://i.ibb.co.com/LZL0FqD/LOGO-YUPI-CARE-ALP.png" alt="Logo">
                     </div>
                 </div>
-                <div class="mx-auto lg:align-right">
+                <div class="mx-auto text-center lg:text-left lg:align-right">
                     <p>© 2024 YuPiSkin Inc. All rights reserved</p>
                 </div>
             </div>
