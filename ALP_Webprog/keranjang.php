@@ -51,8 +51,7 @@
                 </div>
                 <!-- Profile and Cart Icons (hidden on mobile) -->
                 <div class="hidden md:flex navbar-icon space-x-12">
-                    <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer"
-                        id="cartIcon">
+                    <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer">
                         <div class="font-semibold text-xl">
                             <a href="home.php">
                                 <div class="flex items-center space-x-2">
@@ -62,7 +61,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer"
+                    <!-- <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer"
                         id="cartIcon">
                         <div class="font-semibold text-xl">
                             <a href="keranjang.php">
@@ -72,7 +71,51 @@
                                 </div>
                             </a>
                         </div>
+                    </div> -->
+                    <div class="relative" id="cartDropdownContainer">
+                        <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer"
+                            id="cartIcon">
+                            <div class="font-semibold text-xl">
+                                <a href="keranjang.php">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="material-symbols-outlined text-3xl">shopping_cart</span>
+                                        <h1>My Cart</h1>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Dropdown Menu -->
+                        <div id="cartDropdown"
+                            class="hidden absolute right-0 mt-2 w-96 bg-white rounded-md shadow-lg py-4 z-20">
+                            <div class="px-4">
+                                <h2 class="font-bold text-lg mb-4">Shopping Cart</h2>
+                                <!-- Cart Items -->
+                                <div class="space-y-4">
+                                    <div class="flex items-center space-x-4">
+                                        <img class="w-16 h-16 rounded-md"
+                                            src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="Skintific">
+                                        <div class="flex-1">
+                                            <p class="font-semibold">Skintific</p>
+                                            <p>MSH Niacinamide Brightening Moisture Gel</p>
+                                            <p class="font-bold">Rp 30.000</p>
+                                        </div>
+                                        <input type="number" value="1"
+                                            class="w-12 text-center border border-gray-300 rounded-md">
+                                    </div>
+                                    <!-- Repeat for more items -->
+                                </div>
+                                <hr class="my-4">
+                                <!-- Total and Checkout -->
+                                <div class="flex justify-between items-center mb-4">
+                                    <p class="font-semibold text-xl">Total</p>
+                                    <p class="font-semibold text-xl">Rp 30.000</p>
+                                </div>
+                                <button
+                                    class="w-full bg-[#F3BAE5] rounded-xl py-3 font-semibold text-lg text-white transition-all duration-500 hover:bg-[#f48fdb]">Checkout</button>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="relative" id="profileMenuContainer">
                         <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer"
                             id="profileMenuButton">
@@ -153,6 +196,19 @@
 
                 mobileProfileMenuButton.addEventListener('click', function () {
                     mobileProfileMenu.classList.toggle('hidden');
+                });
+                document.addEventListener('DOMContentLoaded', () => {
+                    const cartIcon = document.getElementById('cartIcon');
+                    const cartDropdown = document.getElementById('cartDropdown');
+                    const cartDropdownContainer = document.getElementById('cartDropdownContainer');
+
+                    cartIcon.addEventListener('mouseover', () => {
+                        cartDropdown.classList.remove('hidden');
+                    });
+
+                    cartDropdownContainer.addEventListener('mouseleave', () => {
+                        cartDropdown.classList.add('hidden');
+                    });
                 });
 
                 //end of navigation js
