@@ -262,7 +262,7 @@
                                             </div>
                                             <p>MSH Niacinamide Brightening Moisture Gel</p>
 
-                                            <div class="flex justify-between items-center py-4 md:space-x-40">
+                                            <div class="flex justify-between items-center py-4 md:space-x-56">
                                                 <div>
                                                     <p class="text-xl font-bold">Rp 30.000</p>
                                                 </div>
@@ -321,7 +321,7 @@
                                                 </div>
                                                 <p>MSH Niacinamide Brightening Moisture Gel</p>
 
-                                                <div class="flex justify-between items-center py-4 md:space-x-40">
+                                                <div class="flex justify-between items-center py-4 md:space-x-56">
                                                     <div>
                                                         <p class="text-xl font-bold">Rp 30.000</p>
                                                     </div>
@@ -381,7 +381,7 @@
                                                     </div>
                                                     <p>MSH Niacinamide Brightening Moisture Gel</p>
 
-                                                    <div class="flex justify-between items-center py-4 md:space-x-40">
+                                                    <div class="flex justify-between items-center py-4 md:space-x-56">
                                                         <div>
                                                             <p class="text-xl font-bold">Rp 30.000</p>
                                                         </div>
