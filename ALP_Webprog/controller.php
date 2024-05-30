@@ -25,7 +25,6 @@
         $conn = my_connectDB();
 
         if($conn!=NULL){
-
             $sql_query = "SELECT * FROM `user` WHERE username = '$username'";
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
             if($result -> num_rows == 1){
@@ -63,10 +62,44 @@
         my_closeDB($conn);
     }
 
-    function logoutUser(){
-        $url = "http://localhost/alp/home.php";
-        session_destroy();
-        // header('Location: '.$url);
-        die();
+    function getProductAmount(){
+        $conn = my_connectDB();
+
+        $sql_query = "SELECT * FROM `produk`";
+        $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+
+        if($result -> num_rows > 0){
+            $num_of_rows = mysqli_num_rows( $result );
+            return $num_of_rows;
+        }else{
+            
+        }
+        my_closeDB($conn);
     }
+
+    function readProducts(){
+        $conn = my_connectDB();
+        $allData = array();
+
+        $sql_query = "SELECT * FROM `produk`";
+        $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+        if($result -> num_rows > 0){
+            while($row = $result -> fetch_assoc()){
+                //Simpan data dari database ke dalam array
+                $data["id"] = $row["produk_id"];
+                $data["brand"] = $row["brand"];
+                $data["name"] = $row["produk_name"];
+                $data["harga"] = $row["harga"];
+                //Simpan data di allData
+                array_push($allData, $data);
+            }
+        }else{
+            echo "You don't have any product";
+        }
+
+        my_closeDB($conn);
+        return $allData;
+    }
+
+
 ?>
