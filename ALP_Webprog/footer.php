@@ -8,12 +8,12 @@
 
         <div class="container mt-14 text-[#DEBBD9]">
             <div class="grid grid-cols-1 lg:grid-cols-3">
-                <div class="flex flex-wrap mx-auto lg:align-left mb-2">
+                <div class="flex flex-wrap mx-auto lg:align-left">
                     <a href="#"><ion-icon name="logo-instagram" class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
                     <a href="#"><ion-icon name="logo-facebook" class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
                     <a href="#"><ion-icon name="mail-outline" class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
                 </div>
-                <div class="mx-auto mb-8">
+                <div class="mx-auto mb-8 lg:mb-5">
                     <div class="max-w-14 mx-auto">
                         <img src="https://i.ibb.co.com/LZL0FqD/LOGO-YUPI-CARE-ALP.png" alt="Logo">
                     </div>
@@ -45,7 +45,7 @@
 
         loginMobile.addEventListener('click', function() {
             popupLogin.classList.remove('hidden');
-            profileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('hidden');
         });
 
         register.addEventListener('click', function() {
@@ -55,7 +55,7 @@
 
         registerMobile.addEventListener('click', function() {
             popupRegister.classList.remove('hidden');
-            profileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('hidden');
         });
 
         closepopupLogin.addEventListener('click', function() {
