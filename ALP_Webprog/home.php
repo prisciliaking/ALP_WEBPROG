@@ -201,9 +201,9 @@
                         </div>
                         <form action="home.php" class="w-full" method="POST">
                             <label for="username" class="sr-only">Username</label>
-                            <input name="username" type="username" autocomplete="username" required="" class="block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1" placeholder="Username" value="">
+                            <input name="username" type="username" required="" class="block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1" placeholder="Username" value="">
                             <label for="password" class="sr-only">Password</label>
-                            <input name="password" type="password" autocomplete="current-password" required="" class="mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1" placeholder="Password" value="">
+                            <input name="password" type="password" required="" class="mt-2 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm outline-none placeholder:text-gray-400 focus:ring-2 focus:ring-black focus:ring-offset-1" placeholder="Password" value="">
                             <input type="submit" name="loginUser" class="inline-flex w-full mt-4 items-center justify-center rounded-lg bg-black p-2 py-3 text-sm font-medium text-white outline-none focus:ring-2 focus:ring-black focus:ring-offset-1 disabled:bg-gray-400">
                         </form>
                     </div>
@@ -279,128 +279,55 @@
     <main class="px-4 md:px-24">
         <section class="pt-16 md:pt-8 px-4 lg:px-24">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-7">
-                <!-- card start -->
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
-                    <div class="hover-img">
-                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
-                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
-                            Add to cart
-                        </button>
+                <?php
+                    $result = readProducts();
+                    if(isset($_SESSION["username"])){
+                        $username = $_SESSION["username"];
+                    }
+                    $username = "";
+                    foreach($result as $row){
+                ?>
+                    <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                        <div class="hover-img">
+                            <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+
+                            <?php
+                                if(isset($_SESSION["username"])){
+                                    if($_SESSION["username"] != "admin"){
+                            ?>
+                                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                                            Add to cart
+                                        </button>
+                            <?php  
+                                    }      
+                                }else{
+                            ?>
+                                    <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                                        Add to cart
+                                    </button>
+                            <?php
+                                }
+                            ?>
+                        </div>
+                        <div class="p-5">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900"><?=$row["brand"]?></h5>
+                            <p class="mb-3 font-normal text-gray-700"><?=$row["name"]?></p>
+                        </div>
                     </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
-                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
+                <?php
+                    }
+                ?>
+                <?php
+                if(isset($_SESSION["username"])){
+                    if($_SESSION["username"] == "admin"){
+                ?>
+                    <div class="w-full bg-white">
+                        <!-- add new product button -->
                     </div>
-                </div>
-                <!-- card end -->
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
-                    <div class="hover-img">
-                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
-                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
-                            Add to cart
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
-                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
-                    </div>
-                </div>
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
-                    <div class="hover-img">
-                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
-                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
-                            Add to cart
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
-                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
-                    </div>
-                </div>
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
-                    <div class="hover-img">
-                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
-                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
-                            Add to cart
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
-                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
-                    </div>
-                </div>
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
-                    <div class="hover-img">
-                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
-                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
-                            Add to cart
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
-                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
-                    </div>
-                </div>
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
-                    <div class="hover-img">
-                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
-                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
-                            Add to cart
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
-                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
-                    </div>
-                </div>
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
-                    <div class="hover-img">
-                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
-                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
-                            Add to cart
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
-                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
-                    </div>
-                </div>
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
-                    <div class="hover-img">
-                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
-                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
-                            Add to cart
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
-                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
-                    </div>
-                </div>
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
-                    <div class="hover-img">
-                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
-                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
-                            Add to cart
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
-                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
-                    </div>
-                </div>
-                <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
-                    <div class="hover-img">
-                        <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
-                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
-                            Add to cart
-                        </button>
-                    </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Skintific</h5>
-                        <p class="mb-3 font-normal text-gray-700">MSH Niacinamide Brightening Moisture Gel</p>
-                    </div>
-                </div>
+                <?php
+                    }
+                }
+                ?>
             </div>
         </section>
     </main>
