@@ -1,3 +1,17 @@
+#popuplogin{
+    z-index: 1000;
+}
+
+.carousel-box{
+    z-index: -999;
+}
+
+@media screen and (min-width: 768px) {
+    .carousel-box{
+        height: 50em;
+    }
+}
+
 .product-button{
     position: absolute;
     visibility: hidden;
@@ -39,7 +53,7 @@ footer .footer-content li{
 
 footer .wave{
     position: absolute;
-    top: -100px;
+    top: -50px;
     left: 0;
     width: 100%;
     height: 100px;
@@ -48,25 +62,25 @@ footer .wave{
 }
 
 footer .wave#wave1{
-    z-index: 1000;
+    z-index: 900;
     opacity: 1;
     bottom: 0;
     animation: animateWave 4s linear infinite;
 }
 footer .wave#wave2{
-    z-index: 1000;
+    z-index: 900;
     opacity: .5;
     bottom: 10px;
     animation: animateWave_02 4s linear infinite;
 }
 footer .wave#wave3{
-    z-index: 1000;
+    z-index: 900;
     opacity: .2;
     bottom: 15px;
     animation: animateWave 3s linear infinite;
 }
 footer .wave#wave4{
-    z-index: 1000;
+    z-index: 900;
     opacity: .7;
     bottom: 20px;
     animation: animateWave_02 3s linear infinite;
@@ -76,7 +90,7 @@ footer .wave#wave4{
     background: rgb(222, 187, 217, 0.5);
     backdrop-filter: blur(5px);
     box-shadow: inset 0 -1px 0 0 #DEBBD9 0%;
-    z-index: 9999;
+    z-index: 999;
 }
 
 @keyframes animateWave{
