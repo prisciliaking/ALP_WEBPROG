@@ -9,12 +9,9 @@
         <div class="container mt-14 text-[#DEBBD9]">
             <div class="grid grid-cols-1 lg:grid-cols-3">
                 <div class="flex flex-wrap mx-auto lg:align-left mb-2">
-                    <a href="#"><ion-icon name="logo-instagram"
-                            class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-facebook"
-                            class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
-                    <a href="#"><ion-icon name="mail-outline"
-                            class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
+                    <a href="#"><ion-icon name="logo-instagram" class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
+                    <a href="#"><ion-icon name="logo-facebook" class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
+                    <a href="#"><ion-icon name="mail-outline" class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
                 </div>
                 <div class="mx-auto mb-8">
                     <div class="max-w-14 mx-auto">
@@ -41,31 +38,31 @@
         const closepopupLogin = document.querySelector('#close-popup-login');
         const closepopupRegister = document.querySelector('#close-popup-register');
 
-        login.addEventListener('click', function () {
-            popupLogin.classList.toggle('hidden');
+        login.addEventListener('click', function() {
+            popupLogin.classList.remove('hidden');
             profileMenu.classList.toggle('hidden');
         });
 
-        loginMobile.addEventListener('click', function () {
-            popupLogin.classList.toggle('hidden');
+        loginMobile.addEventListener('click', function() {
+            popupLogin.classList.remove('hidden');
             profileMenu.classList.toggle('hidden');
         });
 
-        register.addEventListener('click', function () {
-            popupRegister.classList.toggle('hidden');
+        register.addEventListener('click', function() {
+            popupRegister.classList.remove('hidden');
             profileMenu.classList.toggle('hidden');
         });
 
-        registerMobile.addEventListener('click', function () {
-            popupRegister.classList.toggle('hidden');
+        registerMobile.addEventListener('click', function() {
+            popupRegister.classList.remove('hidden');
             profileMenu.classList.toggle('hidden');
         });
 
-        closepopupLogin.addEventListener('click', function () {
+        closepopupLogin.addEventListener('click', function() {
             popupLogin.classList.add('hidden');
         });
 
-        closepopupRegister.addEventListener('click', function () {
+        closepopupRegister.addEventListener('click', function() {
             popupRegister.classList.add('hidden');
         });
     </script>
