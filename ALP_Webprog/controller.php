@@ -30,10 +30,13 @@
             if($result -> num_rows == 1){
                 echo "Username already exist";
             }else{
-                $sql_query = "INSERT INTO `user` (`username`, `password`) VALUES ('$username', '$password')";
+                $user = "user";
+                $sql_query = "INSERT INTO `user` (`username`, `password`, `role`) VALUES ('$username', '$password', '$user')";
                 $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
                 $_SESSION['username'] = $username;
                 $_SESSION['password'] = $password;
+                $_SESSION['role'] = "user";
+
                 my_closeDB($conn);
                 return $result;
             }
@@ -49,11 +52,13 @@
         if($conn!=NULL){
             $sql_query = "SELECT * FROM `user` WHERE username = '$username' AND password = '$password'";
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
-            
+            $rows = mysqli_fetch_assoc($result);
             //cek result kosong atau tidak, num_rows jumlah baris di result
             if($result -> num_rows == 1){
                 $_SESSION['username'] = $username;
-                $_SESSION['password'] = $result;
+                $_SESSION['password'] = $password;
+                $_SESSION['role'] = $rows['role'];
+
             }else{
                 echo "Username or password is incorrect";
             }
