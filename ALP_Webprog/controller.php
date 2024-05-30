@@ -106,5 +106,39 @@
         return $allData;
     }
 
+    function updateUser() {
+            if (isset($_SESSION["username"])) {
+                $current_username = $_SESSION["username"];
+                $new_username = $_POST["username"];
+                $new_password = $_POST["password"];
+    
+                $conn = my_connectDB();
+    
+                if ($conn != NULL) {
+                    $sql_query = "UPDATE `user` SET username = ?, password = ? WHERE username = ?";
+                    if ($stmt = mysqli_prepare($conn, $sql_query)) {
+                        mysqli_stmt_bind_param($stmt, "sss", $new_username, $new_password, $current_username);
+                        $result = mysqli_stmt_execute($stmt);
+                        
+                        if ($result) {
+                            // Update session variables
+                            $_SESSION["username"] = $new_username;
+                            $_SESSION["password"] = $new_password;
+                        } else {
+                            echo "Failed to update profile";
+                        }
+    
+                        mysqli_stmt_close($stmt);
+                    } else {
+                        die("Failed to prepare SQL query: " . mysqli_error($conn));
+                    }
+                    my_closeDB($conn);
+                } else {
+                    echo "Error connecting to database";
+                }
+            } else {
+                echo "User is not logged in";
+            }
+        }
 
 ?>
