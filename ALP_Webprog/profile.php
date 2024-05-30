@@ -1,4 +1,5 @@
 <?php include_once('navigation.php'); ?>
+
     <main class="lg:px-24">
         <section class="pt-24 lg:pt-28 px-4 lg:px-24 space-y-4">
 
@@ -20,29 +21,36 @@
                     <!-- edit profile name -->
                     <div>
                         <div class="px-4 py-6">
-                            <form action="update.php" method="POST">
+                            <!-- ini buat update username dan password user -->
+                        <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["action"] == "updateProfile") {
+                                updateUser();
+                        } ?>
+                            <!-- end -->
+                            
+                        <?php if(isset($_SESSION["username"])){ ?>
+                            <form action="" method="POST">
+                                <input type="hidden" name="action" value="updateProfile">
                                 <div class="md:flex md:flex-col md:items-center md:space-y-6 md:px-52">
-                                    <div class="pb-4 w-full">
-                                        <input class="rounded-md w-full p-2 md:p-4 text-lg" type="text"
-                                            name="first_name" placeholder="Full Name">
+                                    <div class="pb-4 w-full space-y-2">
+                                        <label for="username" class="text-lg">Username</label>
+                                        <input class="rounded-md w-full p-2 md:p-4 text-lg" type="text" name="username" value="<?=$_SESSION["username"]?>">
                                     </div>
-
-                                    <div class="pb-4 w-full">
-                                        <input class="rounded-md w-full p-2 md:p-4 text-lg" type="text" name="last_name"
-                                            placeholder="Password">
+                                    <div class="pb-4 w-full space-y-2">
+                                        <label for="password" class="text-lg">Password</label>
+                                        <input class="rounded-md w-full p-2 md:p-4 text-lg" type="text" name="password" value="<?=$_SESSION["password"]?>">
                                     </div>
                                 </div>
-                                <div
-                                    class="pt-4 w-full md:px-52 flex justify-center font-semibold md:justify-end space-x-4">
-                                    <input type="submit" value="Update Profile"
-                                        class="rounded-md p-2 text-lg text-white bg-[#8A6791] hover:bg-[#BEAECB]">
-                                    <button type="button" onclick="window.location.href='logout.php';"
-                                        class="rounded-md p-2 text-lg text-white bg-[#8A6791] hover:bg-[#BEAECB]">
-                                            Logout
+                                <div class="pt-4 w-full md:px-52 flex justify-center font-semibold md:justify-end space-x-4">
+                                    <input type="submit" value="Update Profile" class="rounded-md p-2 text-lg text-white bg-[#8A6791] hover:bg-[#BEAECB]">
+                                    <button type="button" onclick="window.location.href='logout.php';" class="rounded-md p-2 text-lg text-white bg-[#8A6791] hover:bg-[#BEAECB]">
+                                        Logout
                                     </button>
                                 </div>
                             </form>
-                            <!-- Button Example -->
+                        <?php } ?>
+
+                            
+                            <!-- for add product -->
                             <?php if($_SESSION["role"] == "admin") { ?>
                             <div class="md:px-52 flex justify-center md:justify-end pt-6 ">
                                 <a href="newcart.php">
@@ -62,6 +70,3 @@
 
     </main>
     <?php include_once('footer.php'); ?>
-
-
-   
