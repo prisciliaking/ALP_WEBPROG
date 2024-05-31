@@ -44,7 +44,7 @@
                 ?>
                     <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
                         <div class="hover-img">
-                            <img class="rounded-t-lg" src="https://i.ibb.co.com/m0pVBcs/skintific-moist-2.png" alt="" />
+                            <img class="rounded-t-lg" src="<?=$row["product_image"]?>" alt="" />
 
                             <?php
                                 if(isset($_SESSION["role"])){
@@ -76,8 +76,10 @@
                 if(isset($_SESSION["role"])){
                     if($_SESSION["role"] == "admin"){
                 ?>
-                    <div class="w-full bg-white">
-                        <!-- add new product button -->
+                    <div class="w-full bg-white border border-gray-200 rounded-lg shadow hover:scale-105 transition-transform">
+                        <div class="text-center md:pt-36">
+                            <a href="addproduct.php"><ion-icon name="add-circle-outline" class="text-6xl my-4"></ion-icon></a>
+                        </div>
                     </div>
                 <?php
                     }
