@@ -232,4 +232,36 @@
         return $fileName;
     }
 
+        // ini cuma bisa dipake buat delete user doang gak bisa role admin
+    function deleteUser() {
+        if ($_SESSION["role"] == "user") {
+            $username = $_SESSION["username"];
+            $conn = my_connectDB();
+    
+            if ($conn) {
+                $sql_query = "DELETE FROM user WHERE username = ?";
+                $stmt = mysqli_prepare($conn, $sql_query);
+                if ($stmt) {
+                    mysqli_stmt_bind_param($stmt, "s", $username);
+                    if (mysqli_stmt_execute($stmt)) {
+                        session_unset();
+                        session_destroy();
+                        echo "<script>alert('Success to delete user');</script>";
+                        return true;
+                    } else {
+                        echo "<script>alert('Failed to delete user');</script>";
+                    }
+                    mysqli_stmt_close($stmt);
+                } else {
+                    die("Failed to prepare SQL query: " . mysqli_error($conn));
+                }
+                my_closeDB($conn);
+            } else {
+                echo "Error connecting to database";
+            }
+        } else {
+            echo "<script>alert('User is not logged in or does not have permission');</script>";
+        }
+        return false;
+    }
 ?>
