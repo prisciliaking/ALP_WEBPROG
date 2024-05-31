@@ -53,11 +53,28 @@
                 </div>
                 <!-- Cart Icon -->
                 <div class="flex items-center space-x-4 md:hidden pr-4">
-                    <a href="keranjang.php">
-                        <div class="md:hover:text-violet-900 md:hover:scale-105 md:transition-transform md:cursor-pointer">
-                            <span class="material-symbols-outlined text-3xl">shopping_cart</span>
-                        </div>
-                    </a>
+                    <?php if (isset($_SESSION["role"])) { ?>
+                        <?php if ($_SESSION["role"] == "admin") { ?>
+                            <a href="yupiproduct.php">
+                                <div class="md:hover:text-violet-900 md:hover:scale-105 md:transition-transform md:cursor-pointer">
+                                    <span class="material-symbols-outlined text-3xl">inventory_2</span>
+                                </div>
+                            </a>
+                        <?php } elseif ($_SESSION["role"] == "user") { ?>
+                            <a href="keranjang.php">
+                                <div class="md:hover:text-violet-900 md:hover:scale-105 md:transition-transform md:cursor-pointer">
+                                    <span class="material-symbols-outlined text-3xl">shopping_cart</span>
+                                </div>
+                            </a>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <!-- Display something else or nothing for guests -->
+                        <a href="keranjang.php">
+                            <div class="md:hover:text-violet-900 md:hover:scale-105 md:transition-transform md:cursor-pointer">
+                                <span class="material-symbols-outlined text-3xl">shopping_cart</span>
+                            </div>
+                        </a>
+                    <?php } ?>
                 </div>
                 <!-- Profile and Cart Icons (hidden on mobile) -->
                 <div class="hidden md:flex navbar-icon space-x-12">
@@ -71,16 +88,43 @@
                             </a>
                         </div>
                     </div>
-                    <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer" id="cartIcon">
-                        <div class="font-semibold text-xl">
-                            <a href="keranjang.php">
-                                <div class="flex items-center space-x-2">
-                                    <span class="material-symbols-outlined text-3xl">shopping_cart</span>
-                                    <h1>My Cart</h1>
-                                </div>
-                            </a>
+                    <?php if (isset($_SESSION["role"])) { ?>
+                        <?php if ($_SESSION["role"] == "admin") { ?><div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer" id="cartIcon">
+                            <div class="font-semibold text-xl">
+                                <a href="yupiproduct.php">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="material-symbols-outlined text-3xl">inventory_2</span>
+                                        <h1>Yupi Product</h1>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                        <?php } elseif ($_SESSION["role"] == "user") { ?><div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer" id="cartIcon">
+                            <div class="font-semibold text-xl">
+                                <a href="keranjang.php">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="material-symbols-outlined text-3xl">shopping_cart</span>
+                                        <h1>My Cart</h1>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <?php } ?>
+
+                    <?php } else { ?>
+                        <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer" id="cartIcon">
+                            <div class="font-semibold text-xl">
+                                <a href="keranjang.php">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="material-symbols-outlined text-3xl">shopping_cart</span>
+                                        <h1>My Cart</h1>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                    
                     <div class="relative" id="profileMenuContainer">
                         <div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer" id="profileMenuButton">
                             <div class="font-semibold text-xl">
@@ -94,6 +138,7 @@
                             if(isset($_SESSION["username"])){
                         ?>
                             <div id="profileMenu2" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20">
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"><?=$_SESSION["username"]?></a>
                                 <a href="profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="profile">Profile</a>
                                 <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="logout">Logout</a>
                             </div>
@@ -118,8 +163,15 @@
                     <button class="w-full text-left px-4 py-2 text-lg font-semibold text-gray-700 hover:bg-gray-100" id="mobileProfileMenuButton">Profile</button>
                     <!-- Mobile Profile Dropdown Menu -->
                     <div id="mobileProfileMenu" class="hidden bg-white rounded-md shadow-lg">
-                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 login" id="loginMobile">Login</a>
-                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 register" id="registerMobile">Register</a>
+                    <?php if(isset($_SESSION["username"])){ ?>
+                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"><?=$_SESSION["username"]?></a>
+                        <a href="profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="profile">Profile</a>
+                        <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="logout">Logout</a>
+                    <?php }else{ ?>
+                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 login" id="login">Login</a>
+                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 register" id="register">Register</a>
+                            
+                    <?php } ?>
                     </div>
                 </div>
             </div>
