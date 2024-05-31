@@ -53,7 +53,7 @@
                             <!-- for add product -->
                             <?php if($_SESSION["role"] == "admin") { ?>
                             <div class="md:px-52 flex justify-center md:justify-end pt-6 ">
-                                <a href="newcart.php">
+                                <a href="addproduct.php">
                                     <button
                                         class=" bg-[#8A6791] text-lg text-white font-semibold py-2 px-4 rounded hover:bg-[#BEAECB] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
                                         Add Product
