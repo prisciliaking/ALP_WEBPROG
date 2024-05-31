@@ -168,8 +168,8 @@
                         <a href="profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="profile">Profile</a>
                         <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="logout">Logout</a>
                     <?php }else{ ?>
-                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 login" id="login">Login</a>
-                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 register" id="register">Register</a>
+                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 login" id="loginMobile">Login</a>
+                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 register" id="registerMobile">Register</a>
                             
                     <?php } ?>
                     </div>
