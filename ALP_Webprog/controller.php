@@ -28,7 +28,10 @@
             $sql_query = "SELECT * FROM `user` WHERE username = '$username'";
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
             if($result -> num_rows == 1){
-                echo "Username already exist";
+                echo "<script>
+                        alert('Username already exists!');
+                    </script>";
+                return false;
             }else{
                 $user = "user";
                 $sql_query = "INSERT INTO `user` (`username`, `password`, `role`) VALUES ('$username', '$password', '$user')";
@@ -41,7 +44,9 @@
                 return $result;
             }
         }else{
-            echo "Error connect to database";
+            echo "<script>
+                        alert('Error connect to database');
+                    </script>";
         }
     }
 
@@ -60,7 +65,10 @@
                 $_SESSION['role'] = $rows['role'];
 
             }else{
-                echo "Username or password is incorrect";
+                echo "<script>
+                        alert('Username or password is incorrect');
+                    </script>";
+                return false;
             }
         }
 
@@ -95,50 +103,133 @@
                 $data["brand"] = $row["brand"];
                 $data["name"] = $row["produk_name"];
                 $data["harga"] = $row["harga"];
+                $data["product_image"] = $row["product_image"];
                 //Simpan data di allData
                 array_push($allData, $data);
             }
         }else{
-            echo "You don't have any product";
+            echo "<script>
+                        alert('Products not found');
+                    </script>";
         }
 
         my_closeDB($conn);
         return $allData;
     }
 
+    //Function to update user n admin information
     function updateUser() {
-            if (isset($_SESSION["username"])) {
-                $current_username = $_SESSION["username"];
-                $new_username = $_POST["username"];
-                $new_password = $_POST["password"];
-    
-                $conn = my_connectDB();
-    
-                if ($conn != NULL) {
-                    $sql_query = "UPDATE `user` SET username = ?, password = ? WHERE username = ?";
-                    if ($stmt = mysqli_prepare($conn, $sql_query)) {
-                        mysqli_stmt_bind_param($stmt, "sss", $new_username, $new_password, $current_username);
-                        $result = mysqli_stmt_execute($stmt);
-                        
-                        if ($result) {
-                            // Update session variables
-                            $_SESSION["username"] = $new_username;
-                            $_SESSION["password"] = $new_password;
-                        } else {
-                            echo "Failed to update profile";
-                        }
-    
-                        mysqli_stmt_close($stmt);
+        if (isset($_SESSION["username"])) {
+            $current_username = $_SESSION["username"];
+            $new_username = $_POST["username"];
+            $new_password = $_POST["password"];
+
+            $conn = my_connectDB();
+
+            if ($conn != NULL) {
+                $sql_query = "UPDATE `user` SET username = ?, password = ? WHERE username = ?";
+                if ($stmt = mysqli_prepare($conn, $sql_query)) {
+                    mysqli_stmt_bind_param($stmt, "sss", $new_username, $new_password, $current_username);
+                    $result = mysqli_stmt_execute($stmt);
+                    
+                    if ($result) {
+                        // Update session variables
+                        $_SESSION["username"] = $new_username;
+                        $_SESSION["password"] = $new_password;
                     } else {
-                        die("Failed to prepare SQL query: " . mysqli_error($conn));
+                        echo "<script>
+                            alert('Failed to update profile');
+                        </script>";
+                        return false;
                     }
-                    my_closeDB($conn);
+
+                    mysqli_stmt_close($stmt);
                 } else {
-                    echo "Error connecting to database";
+                    die("Failed to prepare SQL query: " . mysqli_error($conn));
                 }
+                my_closeDB($conn);
             } else {
-                echo "User is not logged in";
+                echo "Error connecting to database";
             }
+        } else {
+            echo "<script>
+                        alert('User is not logged in');
+                    </script>";
+            return false;
         }
+    }
+
+    function uploadProduct(){
+        $conn = my_connectDB();
+
+        $brand = $_POST["brand"];
+        $name = $_POST["product_name"];
+        $price = $_POST["price"];
+        $image = $_POST["product_image"];
+
+        //Only if the image is a file
+        // $image = uploadImage();
+        // if(!$image){
+        //     return false;
+        // }else{
+        //     $sql_query = "INSERT INTO `produk` (`brand`, `produk_name`, `price`, `image`) VALUES ('$brand', '$name', '$price', '$image')";
+        //     $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+        //     return $result;
+        // }
+
+        if($conn != NULL){
+            $sql_query = "INSERT INTO `produk` (`brand`, `produk_name`, `harga`, `product_image`) VALUES ('$brand', '$name', '$price', '$image')";
+            $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+            my_closeDB($conn);
+            echo "<script>
+                        alert('Product upload successful');
+                    </script>";
+            return $result;
+        }else{
+            echo "<script>
+                        alert('Product upload failed');
+                    </script>";
+            return false;
+        }
+    }
+
+    //If you want to upload a file
+    function uploadImage(){
+        $photo = $_FILES['product_image'];
+        $fileName = $photo['name'];
+        $fileSize = $photo['size'];
+        $error = $photo['error'];
+        $tempName = $photo['tmp_name'];
+
+        //Check if the submission is an image
+        $validExtension = ["jpg", "jpeg", "png"];
+        //Get the submission's extension
+        $fileExtension = explode('.', $fileName);
+        $fileExtension = strtolower(end($fileExtension));
+
+        //Function to check if a String exists inside an array
+        if(!in_array($fileExtension, $validExtension)){
+            echo "<script>
+                        alert('Only pictures/images with jpg/jpeg/png extensions are allowed!');
+                    </script>";
+            return false;
+        }
+
+        //Check if the size of image is too large
+        //Size here is in byte so 1jt = 1 MB kurleb
+        if($fileSize > 1000000){
+            echo "<script>
+                        alert('Image size is too large');
+                    </script>";
+            return false;
+        }
+
+        //Generate new name for the image - jaga2 2 org upload file dgn nama yg sama
+        $newFileName = uniqid().'.'.$fileExtension;
+
+        //Uploading the image
+        move_uploaded_file($tempName, 'img/'.$newFileName);
+        return $fileName;
+    }
 
 ?>
