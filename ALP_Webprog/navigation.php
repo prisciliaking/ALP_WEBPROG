@@ -54,13 +54,7 @@
                 <!-- Cart Icon -->
                 <div class="flex items-center space-x-4 md:hidden pr-4">
                     <?php if (isset($_SESSION["role"])) { ?>
-                        <?php if ($_SESSION["role"] == "admin") { ?>
-                            <a href="yupiproduct.php">
-                                <div class="md:hover:text-violet-900 md:hover:scale-105 md:transition-transform md:cursor-pointer">
-                                    <span class="material-symbols-outlined text-3xl">inventory_2</span>
-                                </div>
-                            </a>
-                        <?php } elseif ($_SESSION["role"] == "user") { ?>
+                        <?php if ($_SESSION["role"] == "user") { ?>
                             <a href="keranjang.php">
                                 <div class="md:hover:text-violet-900 md:hover:scale-105 md:transition-transform md:cursor-pointer">
                                     <span class="material-symbols-outlined text-3xl">shopping_cart</span>
@@ -89,17 +83,7 @@
                         </div>
                     </div>
                     <?php if (isset($_SESSION["role"])) { ?>
-                        <?php if ($_SESSION["role"] == "admin") { ?><div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer" id="cartIcon">
-                            <div class="font-semibold text-xl">
-                                <a href="yupiproduct.php">
-                                    <div class="flex items-center space-x-2">
-                                        <span class="material-symbols-outlined text-3xl">inventory_2</span>
-                                        <h1>Yupi Product</h1>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <?php } elseif ($_SESSION["role"] == "user") { ?><div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer" id="cartIcon">
+                        <?php if ($_SESSION["role"] == "user") { ?><div class="hover:text-violet-900 hover:scale-105 transition-transform items-center justify-center cursor-pointer" id="cartIcon">
                             <div class="font-semibold text-xl">
                                 <a href="keranjang.php">
                                     <div class="flex items-center space-x-2">
