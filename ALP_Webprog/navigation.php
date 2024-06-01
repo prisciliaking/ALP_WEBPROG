@@ -147,7 +147,6 @@
                     <!-- Mobile Profile Dropdown Menu -->
                     <div id="mobileProfileMenu" class="hidden bg-white rounded-md shadow-lg">
                     <?php if(isset($_SESSION["username"])){ ?>
-                        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"><?=$_SESSION["username"]?></a>
                         <a href="profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="profile">Profile</a>
                         <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="logout">Logout</a>
                     <?php }else{ ?>
