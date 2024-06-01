@@ -138,7 +138,6 @@
                             if(isset($_SESSION["username"])){
                         ?>
                             <div id="profileMenu2" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20">
-                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"><?=$_SESSION["username"]?></a>
                                 <a href="profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="profile">Profile</a>
                                 <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" id="logout">Logout</a>
                             </div>

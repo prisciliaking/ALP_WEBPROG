@@ -75,46 +75,37 @@
         my_closeDB($conn);
     }
 
-    function getProductAmount(){
-        $conn = my_connectDB();
-
-        $sql_query = "SELECT * FROM `produk`";
-        $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
-
-        if($result -> num_rows > 0){
-            $num_of_rows = mysqli_num_rows( $result );
-            return $num_of_rows;
-        }else{
-            
-        }
-        my_closeDB($conn);
-    }
-
-    function readProducts(){
-        $conn = my_connectDB();
-        $allData = array();
-
-        $sql_query = "SELECT * FROM `produk`";
-        $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
-        if($result -> num_rows > 0){
-            while($row = $result -> fetch_assoc()){
-                //Simpan data dari database ke dalam array
-                $data["id"] = $row["produk_id"];
-                $data["brand"] = $row["brand"];
-                $data["name"] = $row["produk_name"];
-                $data["harga"] = $row["harga"];
-                $data["product_image"] = $row["product_image"];
-                //Simpan data di allData
-                array_push($allData, $data);
+    // ini cuma bisa dipake buat delete user doang gak bisa role admin
+    function deleteUser() {
+        if ($_SESSION["role"] == "user") {
+            $username = $_SESSION["username"];
+            $conn = my_connectDB();
+    
+            if ($conn) {
+                $sql_query = "DELETE FROM user WHERE username = ?";
+                $stmt = mysqli_prepare($conn, $sql_query);
+                if ($stmt) {
+                    mysqli_stmt_bind_param($stmt, "s", $username);
+                    if (mysqli_stmt_execute($stmt)) {
+                        session_unset();
+                        session_destroy();
+                        echo "<script>alert('Success to delete user');</script>";
+                        return true;
+                    } else {
+                        echo "<script>alert('Failed to delete user');</script>";
+                    }
+                    mysqli_stmt_close($stmt);
+                } else {
+                    die("Failed to prepare SQL query: " . mysqli_error($conn));
+                }
+                my_closeDB($conn);
+            } else {
+                echo "Error connecting to database";
             }
-        }else{
-            echo "<script>
-                        alert('Products not found');
-                    </script>";
+        } else {
+            echo "<script>alert('User is not logged in or does not have permission');</script>";
         }
-
-        my_closeDB($conn);
-        return $allData;
+        return false;
     }
 
     //Function to update user n admin information
@@ -159,6 +150,50 @@
         }
     }
 
+    function getProductAmount(){
+        $conn = my_connectDB();
+
+        $sql_query = "SELECT * FROM `produk`";
+        $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+
+        if($result -> num_rows > 0){
+            $num_of_rows = mysqli_num_rows( $result );
+            return $num_of_rows;
+        }else{
+            
+        }
+        my_closeDB($conn);
+    }
+
+    function readProducts(){
+        $conn = my_connectDB();
+        $allData = array();
+
+        $sql_query = "SELECT * FROM `produk`";
+        $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+        if($result -> num_rows > 0){
+            while($row = $result -> fetch_assoc()){
+                //Simpan data dari database ke dalam array
+                $data["id"] = $row["produk_id"];
+                $data["brand"] = $row["brand"];
+                $data["name"] = $row["produk_name"];
+                $data["harga"] = $row["harga"];
+                $data["product_image"] = $row["product_image"];
+                //Simpan data di allData
+                array_push($allData, $data);
+            }
+        }else{
+            echo "<script>
+                        alert('Products not found');
+                    </script>";
+        }
+
+        my_closeDB($conn);
+        return $allData;
+    }
+
+    
+
     function uploadProduct(){
         $conn = my_connectDB();
 
@@ -168,16 +203,13 @@
         $image = $_POST["product_image"];
 
         //Only if the image is a file
-        // $image = uploadImage();
-        // if(!$image){
-        //     return false;
-        // }else{
-        //     $sql_query = "INSERT INTO `produk` (`brand`, `produk_name`, `price`, `image`) VALUES ('$brand', '$name', '$price', '$image')";
-        //     $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
-        //     return $result;
-        // }
-
-        if($conn != NULL){
+        $image = uploadImage();
+        if(!$image){
+            echo "<script>
+                        alert('Product upload failed');
+                    </script>";
+            return false;
+        }else{
             $sql_query = "INSERT INTO `produk` (`brand`, `produk_name`, `harga`, `product_image`) VALUES ('$brand', '$name', '$price', '$image')";
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
             my_closeDB($conn);
@@ -185,12 +217,23 @@
                         alert('Product upload successful');
                     </script>";
             return $result;
-        }else{
-            echo "<script>
-                        alert('Product upload failed');
-                    </script>";
-            return false;
         }
+
+        // If the image is a link
+        // if($conn != NULL){
+        //     $sql_query = "INSERT INTO `produk` (`brand`, `produk_name`, `harga`, `product_image`) VALUES ('$brand', '$name', '$price', '$image')";
+        //     $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+        //     my_closeDB($conn);
+        //     echo "<script>
+        //                 alert('Product upload successful');
+        //             </script>";
+        //     return $result;
+        // }else{
+        //     echo "<script>
+        //                 alert('Product upload failed');
+        //             </script>";
+        //     return false;
+        // }
     }
 
     //If you want to upload a file
@@ -200,6 +243,11 @@
         $fileSize = $photo['size'];
         $error = $photo['error'];
         $tempName = $photo['tmp_name'];
+
+        //Check if there is any image
+        if($error == 4){
+            return false;
+        }
 
         //Check if the submission is an image
         $validExtension = ["jpg", "jpeg", "png"];
@@ -229,39 +277,79 @@
 
         //Uploading the image
         move_uploaded_file($tempName, 'img/'.$newFileName);
-        return $fileName;
+        return $newFileName;
     }
 
-        // ini cuma bisa dipake buat delete user doang gak bisa role admin
-    function deleteUser() {
-        if ($_SESSION["role"] == "user") {
-            $username = $_SESSION["username"];
+    function getProductWithID($editID){
+        $data = array();
+        if($editID > 0){
             $conn = my_connectDB();
-    
-            if ($conn) {
-                $sql_query = "DELETE FROM user WHERE username = ?";
-                $stmt = mysqli_prepare($conn, $sql_query);
-                if ($stmt) {
-                    mysqli_stmt_bind_param($stmt, "s", $username);
-                    if (mysqli_stmt_execute($stmt)) {
-                        session_unset();
-                        session_destroy();
-                        echo "<script>alert('Success to delete user');</script>";
-                        return true;
-                    } else {
-                        echo "<script>alert('Failed to delete user');</script>";
-                    }
-                    mysqli_stmt_close($stmt);
-                } else {
-                    die("Failed to prepare SQL query: " . mysqli_error($conn));
+
+            $sql_query = "SELECT * FROM `produk` WHERE produk_id = " . $editID;
+            $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+            //result berupa array
+
+            if($result -> num_rows > 0){
+                while($row = $result -> fetch_assoc()){
+                    //Simpan data dari database ke dalam array
+                    $data["id"] = $row["produk_id"];
+                    $data["brand"] = $row["brand"];
+                    $data["name"] = $row["produk_name"];
+                    $data["harga"] = $row["harga"];
+                    $data["product_image"] = $row["product_image"];
                 }
-                my_closeDB($conn);
-            } else {
-                echo "Error connecting to database";
             }
-        } else {
-            echo "<script>alert('User is not logged in or does not have permission');</script>";
+            my_closeDB($conn);
+            return $data;
         }
-        return false;
+    }
+
+    function updateProduct($id, $brand, $name, $harga, $image, $oldImage){
+        if($id!="" && $brand!="" && $name!="" && $harga!="" && $image!=""){
+            if($image != $oldImage){
+                $oldImage = "img/".$oldImage;
+                if(file_exists( $oldImage)){
+                    unlink($oldImage);
+                }else{
+                    echo "<script>
+                            alert('Old image doesn't exist');
+                        </script>";
+                }
+            }
+
+            $conn = my_connectDB();
+            $sql_query = "UPDATE `produk` 
+                            SET `brand` = '$brand', 
+                                `produk_name` = '$name', 
+                                `harga` = '$harga',
+                                `product_image` = '$image' 
+                            WHERE `produk`.`produk_id` = $id;";
+            $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+            my_closeDB($conn);
+            echo "<script>
+                        alert('Product edit successful');
+                    </script>";
+            return $result;
+        }
+    }
+
+    function deleteProduct($deleteID, $oldImage){
+        $conn = my_connectDB();
+
+        if($conn != NULL){
+            $oldImage = "img/".$oldImage;
+            if(file_exists( $oldImage)){
+                unlink($oldImage);
+            }else{
+                echo "<script>
+                        alert('Old image doesn't exist');
+                    </script>";
+            }
+
+            $sql_query = "DELETE FROM produk WHERE `produk`.`produk_id` = $deleteID";
+            $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+            my_closeDB($conn);
+            return $result;
+        }
     }
 ?>

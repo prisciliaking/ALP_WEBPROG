@@ -6,23 +6,23 @@
             <div class="relative h-56 overflow-hidden rounded-lg md:h-full">
                 <!-- Item 1 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="carousel_banner_1.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="img/carousel_banner_1.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                 </div>
                 <!-- Item 2 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="carousel_banner_2.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="img/carousel_banner_2.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                 </div>
                 <!-- Item 3 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="img/sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                 </div>
                 <!-- Item 4 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="img/sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                 </div>
                 <!-- Item 5 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="img/sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                 </div>
             </div>
         </div>
@@ -42,22 +42,28 @@
                     $role = "";
                     foreach($result as $row){
                 ?>
-                    <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb]">
+                    <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb] hover-product">
                         <div class="hover-img">
-                            <img class="rounded-t-lg" src="<?=$row["product_image"]?>" alt="" />
+                            <img class="rounded-t-lg" src="img/<?=$row["product_image"]?>" alt="" />
 
                             <?php
                                 if(isset($_SESSION["role"])){
                                     if($_SESSION["role"] != "admin"){
                             ?>
-                                        <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                                        <button href="#" class="text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
                                             Add to cart
                                         </button>
                             <?php  
+                                    }else{
+                            ?>
+                                        <a href="editproduct.php?editID=<?=$row['id']?>" class="text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                                            Edit Product
+                                        </a>
+                            <?php
                                     }      
                                 }else{
                             ?>
-                                    <button href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                                    <button href="#" class="text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
                                         Add to cart
                                     </button>
                             <?php
@@ -76,11 +82,11 @@
                 if(isset($_SESSION["role"])){
                     if($_SESSION["role"] == "admin"){
                 ?>
-                    <div class="w-full bg-white border border-gray-200 rounded-lg shadow hover:scale-105 transition-transform">
-                        <div class="text-center md:pt-36">
-                            <a href="addproduct.php"><ion-icon name="add-circle-outline" class="text-6xl my-4"></ion-icon></a>
+                    <a href="addproduct.php">
+                        <div class="bg-[#beaecb] w-full h-full border border-gray-200 rounded-lg shadow hover:scale-105 transition-transform flex items-center justify-center">
+                            <ion-icon name="add-circle-outline" class="text-6xl"></ion-icon>
                         </div>
-                    </div>
+                    </a>
                 <?php
                     }
                 }
