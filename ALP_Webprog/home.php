@@ -50,7 +50,7 @@
                                 if(isset($_SESSION["role"])){
                                     if($_SESSION["role"] != "admin"){
                             ?>
-                                        <button href="#" class="text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                                        <button product-id="<?=$row['id']?>" class="addButton text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
                                             Add to cart
                                         </button>
                             <?php  
@@ -63,7 +63,7 @@
                                     }      
                                 }else{
                             ?>
-                                    <button href="#" class="text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                                    <button product-id="<?=$row['id']?>" class="addButton text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
                                         Add to cart
                                     </button>
                             <?php
@@ -73,6 +73,7 @@
                         <div class="p-5">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900"><?=$row["brand"]?></h5>
                             <p class="mb-3 font-normal text-gray-700"><?=$row["name"]?></p>
+                            <p class="mb-3 font-normal text-gray-700">Rp. <?=$row["harga"]?>,00</p>
                         </div>
                     </div>
                 <?php
@@ -94,5 +95,24 @@
             </div>
         </section>
     </main>
+
+    <script>
+        var product_id = document.getElementsByClassName("addButton");
+        for(var i = 0; i<product_id.length; i++){
+            product_id[i].addEventListener("click", function(event){
+                var target = event.target;
+                var id = this.getAttribute("product-id");
+                var xml = new XMLHttpRequest();
+                xml.onreadystatechange = function(){
+                    if(this.readyState == 4 && this.status == 200){
+                        alert(this.responseText);
+                    }
+                }
+
+                xml.open("GET", "controller.php?addCartID="+id, true);
+                xml.send();
+            });
+        }
+    </script>
 
     <?php include_once('footer.php'); ?>

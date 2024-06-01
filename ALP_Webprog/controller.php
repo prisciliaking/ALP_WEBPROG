@@ -3,11 +3,11 @@
     //Function untuk connect ke database
     function my_connectDB(){
         $host = "localhost";
-        $user = "root";
+        $users = "root";
         $pwd = "";
         $db = "yupiskin";
 
-        $conn = mysqli_connect($host, $user, $pwd, $db) or die("Error connect to database");
+        $conn = mysqli_connect($host, $users, $pwd, $db) or die("Error connect to database");
         
         return $conn;
     }
@@ -25,7 +25,7 @@
         $conn = my_connectDB();
 
         if($conn!=NULL){
-            $sql_query = "SELECT * FROM `user` WHERE username = '$username'";
+            $sql_query = "SELECT * FROM `users` WHERE username = '$username'";
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
             if($result -> num_rows == 1){
                 echo "<script>
@@ -33,12 +33,16 @@
                     </script>";
                 return false;
             }else{
-                $user = "user";
-                $sql_query = "INSERT INTO `user` (`username`, `password`, `role`) VALUES ('$username', '$password', '$user')";
+                $role = "user";
+                $sql_query = "INSERT INTO `users` (`username`, `password`, `role`) VALUES ('$username', '$password', '$role')";
                 $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+                $sql_query = "SELECT * FROM `users` WHERE username = '$username'";
+                $userData = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+                $row = mysqli_fetch_assoc($userData);
+                $_SESSION['user_id'] = $row['id'];
                 $_SESSION['username'] = $username;
                 $_SESSION['password'] = $password;
-                $_SESSION['role'] = "user";
+                $_SESSION['role'] = "users";
 
                 my_closeDB($conn);
                 return $result;
@@ -55,11 +59,12 @@
         $password = $_POST["password"];
         $conn = my_connectDB();
         if($conn!=NULL){
-            $sql_query = "SELECT * FROM `user` WHERE username = '$username' AND password = '$password'";
+            $sql_query = "SELECT * FROM `users` WHERE username = '$username' AND password = '$password'";
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
             $rows = mysqli_fetch_assoc($result);
             //cek result kosong atau tidak, num_rows jumlah baris di result
             if($result -> num_rows == 1){
+                $_SESSION['user_id'] = $rows['id'];
                 $_SESSION['username'] = $username;
                 $_SESSION['password'] = $password;
                 $_SESSION['role'] = $rows['role'];
@@ -75,24 +80,24 @@
         my_closeDB($conn);
     }
 
-    // ini cuma bisa dipake buat delete user doang gak bisa role admin
+    // ini cuma bisa dipake buat delete users doang gak bisa role admin
     function deleteUser() {
-        if ($_SESSION["role"] == "user") {
+        if ($_SESSION["role"] == "users") {
             $username = $_SESSION["username"];
             $conn = my_connectDB();
     
             if ($conn) {
-                $sql_query = "DELETE FROM user WHERE username = ?";
+                $sql_query = "DELETE FROM users WHERE username = ?";
                 $stmt = mysqli_prepare($conn, $sql_query);
                 if ($stmt) {
                     mysqli_stmt_bind_param($stmt, "s", $username);
                     if (mysqli_stmt_execute($stmt)) {
                         session_unset();
                         session_destroy();
-                        echo "<script>alert('Success to delete user');</script>";
+                        echo "<script>alert('Success to delete users');</script>";
                         return true;
                     } else {
-                        echo "<script>alert('Failed to delete user');</script>";
+                        echo "<script>alert('Failed to delete users');</script>";
                     }
                     mysqli_stmt_close($stmt);
                 } else {
@@ -103,12 +108,12 @@
                 echo "Error connecting to database";
             }
         } else {
-            echo "<script>alert('User is not logged in or does not have permission');</script>";
+            echo "<script>alert('users is not logged in or does not have permission');</script>";
         }
         return false;
     }
 
-    //Function to update user n admin information
+    //Function to update users n admin information
     function updateUser() {
         if (isset($_SESSION["username"])) {
             $current_username = $_SESSION["username"];
@@ -118,7 +123,7 @@
             $conn = my_connectDB();
 
             if ($conn != NULL) {
-                $sql_query = "UPDATE `user` SET username = ?, password = ? WHERE username = ?";
+                $sql_query = "UPDATE `users` SET username = ?, password = ? WHERE username = ?";
                 if ($stmt = mysqli_prepare($conn, $sql_query)) {
                     mysqli_stmt_bind_param($stmt, "sss", $new_username, $new_password, $current_username);
                     $result = mysqli_stmt_execute($stmt);
@@ -144,7 +149,7 @@
             }
         } else {
             echo "<script>
-                        alert('User is not logged in');
+                        alert('users is not logged in');
                     </script>";
             return false;
         }
@@ -174,7 +179,7 @@
         if($result -> num_rows > 0){
             while($row = $result -> fetch_assoc()){
                 //Simpan data dari database ke dalam array
-                $data["id"] = $row["produk_id"];
+                $data["id"] = $row["id"];
                 $data["brand"] = $row["brand"];
                 $data["name"] = $row["produk_name"];
                 $data["harga"] = $row["harga"];
@@ -285,14 +290,14 @@
         if($editID > 0){
             $conn = my_connectDB();
 
-            $sql_query = "SELECT * FROM `produk` WHERE produk_id = " . $editID;
+            $sql_query = "SELECT * FROM `produk` WHERE id = " . $editID;
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
             //result berupa array
 
             if($result -> num_rows > 0){
                 while($row = $result -> fetch_assoc()){
                     //Simpan data dari database ke dalam array
-                    $data["id"] = $row["produk_id"];
+                    $data["id"] = $row["id"];
                     $data["brand"] = $row["brand"];
                     $data["name"] = $row["produk_name"];
                     $data["harga"] = $row["harga"];
@@ -323,7 +328,7 @@
                                 `produk_name` = '$name', 
                                 `harga` = '$harga',
                                 `product_image` = '$image' 
-                            WHERE `produk`.`produk_id` = $id;";
+                            WHERE `produk`.`id` = $id;";
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
             my_closeDB($conn);
             echo "<script>
@@ -346,14 +351,14 @@
                     </script>";
             }
 
-            $sql_query = "DELETE FROM produk WHERE `produk`.`produk_id` = $deleteID";
+            $sql_query = "DELETE FROM produk WHERE `produk`.`id` = $deleteID";
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
             my_closeDB($conn);
             return $result;
         }
     }
 
-function readUsers() {
+    function readUsers() {
         $conn = my_connectDB();
         $alldata = array();
         // ngecek user yang diambil cuma yang ada role di user doang
@@ -376,30 +381,29 @@ function readUsers() {
         return $alldata;
     }
 
-function getTransaction($username) {
+    function readTransaction($id) {
         $transactions = array();
         
-        if (!empty($username)) {
+        if (!empty($id)) {
             $conn = my_connectDB();
         
             // SQL query to get transaction details
-            $sql_query = "SELECT t.username AS username, t.transaksi_id, t.produk_id, p.brand AS brand,
-                          p.product_image AS product_image, p.produk_name AS nama_produk, t.jumlah  AS jumlah, p.harga  AS harga, 
-                          (t.jumlah  * p.harga ) AS total_harga, t.tanggal  AS tanggal, t.status
+            $sql_query = "SELECT t.id, t.produk_id, p.brand, p.product_image, p.produk_name AS nama_produk, t.jumlah, p.harga, 
+                          (t.jumlah * p.harga) AS total_harga, t.tanggal, t.status
                           FROM transaksi t
-                          JOIN produk p ON t.produk_id = p.produk_id
-                          WHERE t.username = ?";
+                          JOIN produk p ON t.produk_id = p.id
+                          JOIN users u ON t.user_id = u.id
+                          WHERE u.id = ? AND u.role = 'user'";
         
             if ($stmt = $conn->prepare($sql_query)) {
-                $stmt->bind_param("s", $username);
+                $stmt->bind_param("i", $id);
                 $stmt->execute();
                 $result = $stmt->get_result();
         
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $transaction = array(
-                            "username" => $row["username"],
-                            "transaksi_id" => $row["transaksi_id"],
+                            "id" => $row["id"],
                             "produk_id" => $row["produk_id"],
                             "brand" => $row["brand"],
                             "product_image" => $row["product_image"],
@@ -421,8 +425,44 @@ function getTransaction($username) {
         
             my_closeDB($conn);
         }
-        
         return $transactions;
     }
 
+    if(isset($_GET["addCartID"])){
+        $conn = my_connectDB();
+        $productID = $_GET["addCartID"];
+        $user_id = $_SESSION["user_id"];
+        $data = array();
+        $product = getProductWithID($productID);
+        $currDate = date("Y-m-d");
+        if($productID!="" && $user_id!=""){
+            $sql_query = "SELECT * FROM transaksi WHERE `id` = $productID && `user_id` = $user_id && `status` = 'pending'";
+            $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+            if($result -> num_rows == 1){
+                while($row = $result -> fetch_assoc()){
+                    //Simpan data dari database ke dalam array
+                    $data["id"] = $row["id"];
+                    $data["jumlah"] = $row["jumlah"];
+                    $data["status"] = $row["status"];
+                    $data["user_id"] = $row["user_id"];
+                    $data["id"] = $row["id"];
+                }
+
+                $data["jumlah"]++;
+
+                $sql_query = "UPDATE `transaksi` 
+                            SET `jumlah` = ".$data['jumlah']."
+                            WHERE `transaksi`.`id` = ".$data['id'].";";
+                $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+            }else{
+                $sql_query = "INSERT INTO `transaksi` (`jumlah`, `tanggal`, `status`, `user_id`, `produk_id`) VALUES (1, '$currDate', 'pending', '$user_id', $productID)";
+                $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+            }
+            my_closeDB($conn);
+            echo "Product added to cart";
+        }else{
+            echo "Please login first!";
+            return false;
+        }
+    }
 ?>
