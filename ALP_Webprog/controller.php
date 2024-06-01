@@ -362,10 +362,11 @@
         $conn = my_connectDB();
         $alldata = array();
         // ngecek user yang diambil cuma yang ada role di user doang
-        $sql_query = "SELECT username, password, role FROM `user` WHERE `role` = 'user'";
+        $sql_query = "SELECT * FROM `users` WHERE `role` = 'user'";
         $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
+                $data["id"] = $row["id"];
                 $data["username"] = $row["username"];
                 $data["password"] = $row["password"];
                 $data["role"] = $row["role"];
