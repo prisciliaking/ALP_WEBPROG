@@ -376,4 +376,53 @@ function readUsers() {
         return $alldata;
     }
 
+function getTransaction($username) {
+        $transactions = array();
+        
+        if (!empty($username)) {
+            $conn = my_connectDB();
+        
+            // SQL query to get transaction details
+            $sql_query = "SELECT t.username AS username, t.transaksi_id, t.produk_id, p.brand AS brand,
+                          p.product_image AS product_image, p.produk_name AS nama_produk, t.jumlah  AS jumlah, p.harga  AS harga, 
+                          (t.jumlah  * p.harga ) AS total_harga, t.tanggal  AS tanggal, t.status
+                          FROM transaksi t
+                          JOIN produk p ON t.produk_id = p.produk_id
+                          WHERE t.username = ?";
+        
+            if ($stmt = $conn->prepare($sql_query)) {
+                $stmt->bind_param("s", $username);
+                $stmt->execute();
+                $result = $stmt->get_result();
+        
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $transaction = array(
+                            "username" => $row["username"],
+                            "transaksi_id" => $row["transaksi_id"],
+                            "produk_id" => $row["produk_id"],
+                            "brand" => $row["brand"],
+                            "product_image" => $row["product_image"],
+                            "nama_produk" => $row["nama_produk"],
+                            "jumlah_produk" => $row["jumlah"],
+                            "harga_produk" => $row["harga"],
+                            "total_harga" => $row["total_harga"],
+                            "tanggal_transaksi" => $row["tanggal"],
+                            "status" => $row["status"]
+                        );
+                        $transactions[] = $transaction;
+                    }
+                }
+        
+                $stmt->close();
+            } else {
+                die("Error preparing SQL statement: " . $conn->error);
+            }
+        
+            my_closeDB($conn);
+        }
+        
+        return $transactions;
+    }
+
 ?>
