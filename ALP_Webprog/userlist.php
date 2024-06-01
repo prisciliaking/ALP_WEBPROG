@@ -9,7 +9,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-7 mt-4">
             <?php
-                $result = readUsers('user');
+                $result = readUsers();
                 foreach ($result as $row) {
             ?>
                 <div class="w-full bg-white border border-gray-200 rounded-lg shadow p-5 space-y-2">
@@ -18,8 +18,8 @@
                     </div>
 
                     <div>
-                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900">Username: <?=$row["username"]?></h5>
-                        <a href="usertransaksi.php?username=<?= urlencode($row["username"]) ?>" class="text-blue-500">View Transactions</a>
+                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900">Username: <?= strtoupper($row["username"]) ?></h5>
+                        <a href="usertransaksi.php?user_id=<?=urlencode($row["id"])?>" class="bg-[#F3BAE5] hover:bg-[#BEAECB] text-[#8A6791] hover:text-white px-2 rounded-md font-semibold">View Transactions</a>
                     </div>
                 </div>
             <?php
