@@ -352,4 +352,28 @@
             return $result;
         }
     }
+
+function readUsers() {
+        $conn = my_connectDB();
+        $alldata = array();
+        // ngecek user yang diambil cuma yang ada role di user doang
+        $sql_query = "SELECT username, password, role FROM `user` WHERE `role` = 'user'";
+        $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data["username"] = $row["username"];
+                $data["password"] = $row["password"];
+                $data["role"] = $row["role"];
+                array_push($alldata, $data);
+            }
+        } else {
+            echo "<script>
+                    alert('Users not found');
+                  </script>";
+        }
+    
+        my_closeDB($conn);
+        return $alldata;
+    }
+
 ?>
