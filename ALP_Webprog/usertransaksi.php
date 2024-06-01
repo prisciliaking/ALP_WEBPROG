@@ -35,13 +35,18 @@
                                 <p>Status: <?=$transaction["status"]?></p>
                             </div>
                         </div>
-            <?php
-                    }
+            <?php }
                 } else {
                     echo "<p class='text-center'>No user selected.</p>";
                 }
-            ?>
-        </div>
+                
+        if (count($transactions) <= 0) { ?>
+            </div>
+            <div class='flex flex-col justify-center items-center md:space-y-12'>
+                    <p class='text-2xl'>This user has not made a purchase yet.</p>
+                    <a href='userlist.php' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#8a6792] hover:bg-[#755B7B] rounded-lg'>Return to User List</a>
+            </div>
+        <?php } ?>
     </section>
 </main>
 
