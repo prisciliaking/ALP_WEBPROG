@@ -437,16 +437,13 @@
         $product = getProductWithID($productID);
         $currDate = date("Y-m-d");
         if($productID!="" && $user_id!=""){
-            $sql_query = "SELECT * FROM transaksi WHERE `id` = $productID && `user_id` = $user_id && `status` = 'pending'";
+            $sql_query = "SELECT * FROM transaksi WHERE `produk_id` = $productID && `user_id` = $user_id && `status` = 'pending'";
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
-            if($result -> num_rows == 1){
+            if($result -> num_rows >= 1){
                 while($row = $result -> fetch_assoc()){
                     //Simpan data dari database ke dalam array
                     $data["id"] = $row["id"];
                     $data["jumlah"] = $row["jumlah"];
-                    $data["status"] = $row["status"];
-                    $data["user_id"] = $row["user_id"];
-                    $data["id"] = $row["id"];
                 }
 
                 $data["jumlah"]++;
