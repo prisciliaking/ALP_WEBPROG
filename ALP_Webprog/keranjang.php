@@ -71,17 +71,16 @@ $pending_transactions = array_filter($all_transactions, function($transaction) {
                                                             <path d="M11 5.5V16.5M16.5 11H5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
                                                         </svg>
                                                     </button>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </label>
                                 </div>
                                 <div>
-                                <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
-                            </div>
-                            <?php }
-                        } else { ?>
+                                    <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+                                </div>
+                            <?php } ?>
+                        <?php } else { ?>
                             <div class='flex flex-col justify-center items-center md:space-y-12'>
                                 <p class='text-2xl'>There is no transaction here.</p>
                                 <a href='home.php' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#8a6792] hover:bg-[#755B7B] rounded-lg'>Return Home</a>
@@ -119,3 +118,19 @@ $pending_transactions = array_filter($all_transactions, function($transaction) {
     </section>
 </main>
 <?php include_once('footer.php'); ?>
+
+<!-- Add the following script at the end of your file -->
+<script>
+document.getElementById('select-all').addEventListener('change', function() {
+    // Get the state of the "Select All" checkbox
+    const selectAllChecked = this.checked;
+
+    // Get all item checkboxes
+    const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+
+    // Set the state of all item checkboxes to match the "Select All" checkbox
+    itemCheckboxes.forEach(checkbox => {
+        checkbox.checked = selectAllChecked;
+    });
+});
+</script>
