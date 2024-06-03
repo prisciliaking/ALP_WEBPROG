@@ -134,8 +134,8 @@
                         $_SESSION["password"] = $new_password;
                     } else {
                         echo "<script>
-                            alert('Failed to update profile');
-                        </script>";
+                                  alert('Failed to update profile');
+                                </script>";
                         return false;
                     }
 
@@ -223,22 +223,6 @@
                     </script>";
             return $result;
         }
-
-        // If the image is a link
-        // if($conn != NULL){
-        //     $sql_query = "INSERT INTO `produk` (`brand`, `produk_name`, `harga`, `product_image`) VALUES ('$brand', '$name', '$price', '$image')";
-        //     $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
-        //     my_closeDB($conn);
-        //     echo "<script>
-        //                 alert('Product upload successful');
-        //             </script>";
-        //     return $result;
-        // }else{
-        //     echo "<script>
-        //                 alert('Product upload failed');
-        //             </script>";
-        //     return false;
-        // }
     }
 
     //If you want to upload a file
@@ -285,6 +269,9 @@
         return $newFileName;
     }
 
+
+    // ini gunanya buat ambil product sesuai dengan id user, jadi 
+    // selain id user yg dipilih gk bakalan keluar tu product user lain
     function getProductWithID($editID){
         $data = array();
         if($editID > 0){
@@ -309,6 +296,8 @@
         }
     }
 
+
+    // ini buat update product seperti biasa ygy
     function updateProduct($id, $brand, $name, $harga, $image, $oldImage){
         if($id!="" && $brand!="" && $name!="" && $harga!="" && $image!=""){
             if($image != $oldImage){
@@ -338,6 +327,8 @@
         }
     }
 
+
+    // ini cuma delete product biasa 
     function deleteProduct($deleteID, $oldImage){
         $conn = my_connectDB();
 
@@ -358,6 +349,7 @@
         }
     }
 
+    // ini buat ngeliat diuser list, admin bisa ngeliat user yang punya role user
     function readUsers() {
         $conn = my_connectDB();
         $alldata = array();
@@ -373,15 +365,14 @@
                 array_push($alldata, $data);
             }
         } else {
-            echo "<script>
-                    alert('Users not found');
-                  </script>";
         }
     
         my_closeDB($conn);
         return $alldata;
     }
 
+
+    // ini buat ngambil transaksi yang dmiliki oleh user dicek berdasarkan idnya
     function readTransaction($id) {
         $transactions = array();
         
@@ -429,6 +420,8 @@
         return $transactions;
     }
 
+
+    // ini buat add cart ke user berdasarkan idnya
     if(isset($_GET["addCartID"])){
         $conn = my_connectDB();
         $productID = $_GET["addCartID"];
@@ -445,7 +438,7 @@
                     $data["id"] = $row["id"];
                     $data["jumlah"] = $row["jumlah"];
                 }
-
+                //bakalan ngecount sendiri kalau misal add to cart tapi belum di bayar
                 $data["jumlah"]++;
 
                 $sql_query = "UPDATE `transaksi` 
@@ -463,4 +456,30 @@
             return false;
         }
     }
-?>
+
+    function deleteTransaction($transaction_id, $user_id) {
+        $conn = my_connectDB();
+        $sql_query = "DELETE FROM transaksi WHERE id = ? AND user_id = ?";
+    
+        if ($stmt = $conn->prepare($sql_query)) {
+            $stmt->bind_param("ii", $transaction_id, $user_id);
+            $stmt->execute();
+    
+            // Debugging output to check query execution
+            error_log("SQL query executed: " . $stmt->affected_rows . " rows affected.");
+    
+            if ($stmt->affected_rows > 0) {
+                $result = true;
+            } else {
+                $result = false;
+            }
+    
+            $stmt->close();
+        } else {
+            die("Error preparing SQL statement: " . $conn->error);
+        }
+    
+        my_closeDB($conn);
+        return $result;
+    }
+    ?>
