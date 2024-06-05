@@ -32,5 +32,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteTransaction']) 
     }
 }
 
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['approveTransaction']) && isset($_POST['produk_id']) && isset($_POST['user_id'])){
+    $productID = $_POST['produk_id'];
+    $userID = $_POST['user_id'];
+
+    $result = changeTransactionStatus($userID, $productID);
+
+    header("Location: usertransaksi.php?user_id=" . urlencode($userID));
+    exit();
+}
+
 // Handle displaying the transactions or other logic here (if not handling deletion)
 ?>

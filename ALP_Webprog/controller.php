@@ -42,7 +42,7 @@
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['username'] = $username;
                 $_SESSION['password'] = $password;
-                $_SESSION['role'] = "users";
+                $_SESSION['role'] = "user";
 
                 my_closeDB($conn);
                 return $result;
@@ -82,7 +82,7 @@
 
     // ini cuma bisa dipake buat delete users doang gak bisa role admin
     function deleteUser() {
-        if ($_SESSION["role"] == "users") {
+        if ($_SESSION["role"] == "user") {
             $username = $_SESSION["username"];
             $conn = my_connectDB();
     
@@ -149,7 +149,7 @@
             }
         } else {
             echo "<script>
-                        alert('users is not logged in');
+                        alert('User is not logged in');
                     </script>";
             return false;
         }
@@ -271,7 +271,7 @@
 
 
     // ini gunanya buat ambil product sesuai dengan id user, jadi 
-    // selain id user yg dipilih gk bakalan keluar tu product user lain
+    // selain id user yg dipilih gk bakalan keluar itu product user lain
     function getProductWithID($editID){
         $data = array();
         if($editID > 0){
@@ -422,9 +422,14 @@
 
 
     // ini buat add cart ke user berdasarkan idnya
-    if(isset($_GET["addCartID"])){
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart']) && isset($_POST['produkID'])){
+        if(!isset($_SESSION['user_id'])){
+            header("Location: home.php");
+            exit();
+        }
+
         $conn = my_connectDB();
-        $productID = $_GET["addCartID"];
+        $productID = $_POST['produkID'];
         $user_id = $_SESSION["user_id"];
         $data = array();
         $product = getProductWithID($productID);
@@ -450,10 +455,12 @@
                 $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
             }
             my_closeDB($conn);
-            echo "Product added to cart";
+            header("Location: home.php");
+            exit();
         }else{
-            echo "Please login first!";
-            return false;
+            header("Location: home.php");
+            exit();
+            
         }
     }
 
@@ -481,5 +488,66 @@
     
         my_closeDB($conn);
         return $result;
+    }
+
+    function changeTransactionStatus($userID, $productID){
+        $conn = my_connectDB();
+        if($userID!="" && $productID!=""){
+            $sql_query = "UPDATE `transaksi` SET `status` = 'success' WHERE `user_id` = $userID && `produk_id` = $productID && `status` = 'pending'";
+            $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+            if($result){
+                echo "<script>
+                        alert('Transaction status changed');
+                    </script>";
+                return $result;
+            }else{
+                echo "<script>
+                        alert('Approval system failed');
+                    </script>";
+                return false;
+            }
+            my_closeDB($conn);
+        }
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteTransaction']) && isset($_POST['transaction_id']) && isset($_POST['user_id'])) {
+        // Retrieve transaction_id and user_id from POST data and convert them to integers for security
+        $transaction_id = intval($_POST['transaction_id']);
+        $user_id = intval($_POST['user_id']);
+    
+        // Debugging output to check values (this will be logged)
+        error_log("Attempting to delete transaction ID: $transaction_id for user ID: $user_id");
+    
+        // Call the deleteTransaction function to delete the transaction with the provided IDs
+        $deleteSuccess = deleteTransaction($transaction_id, $user_id);
+    
+        // Check if the transaction was deleted successfully
+        if ($deleteSuccess) {
+            // Log success message
+            error_log("Transaction ID: $transaction_id for user ID: $user_id deleted successfully.");
+    
+            // Redirect to the same page with a success message
+            header("Location: usertransaksi.php?user_id=" . urlencode($user_id) . "&message=Transaction deleted successfully");
+            exit(); // Exit the script after redirecting
+        } else {
+            // Log failure message
+            error_log("Failed to delete transaction ID: $transaction_id for user ID: $user_id.");
+    
+            // Redirect to the same page with an error message
+            header("Location: usertransaksi.php?user_id=" . urlencode($user_id) . "&message=Failed to delete transaction");
+            exit(); // Exit the script after redirecting
+        }
+    }
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['approveTransaction']) && isset($_POST['produk_id']) && isset($_POST['user_id'])){
+        $productID = $_POST['produk_id'];
+        $userID = $_POST['user_id'];
+    
+        error_log("Attempting to delete transaction ID: $transaction_id for user ID: $user_id");
+    
+        $result = changeTransactionStatus($userID, $productID);
+    
+        header("Location: usertransaksi.php?user_id=" . urlencode($userID));
+        exit();
     }
     ?>

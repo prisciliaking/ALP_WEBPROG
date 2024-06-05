@@ -23,30 +23,44 @@
                     foreach ($transactions as $transaction) {
             ?>
                         <div class="w-full bg-white border border-gray-200 rounded-lg shadow p-5 space-y-2">
-                <div>
-                    <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900">Transaction Status</h5>
-                    <div class="relative">
-                        <img class="rounded-t-lg w-full" src="img/<?= $transaction["product_image"] ?>" />
-                        <form method="POST" action="deletetransaction.php">
-                            <input type="hidden" name="deleteTransaction" value="1">
-                            <input type="hidden" name="transaction_id" value="<?= $transaction['id'] ?>">
-                            <input type="hidden" name="user_id" value="<?= $user_id ?>">
-                            <button type="submit" class="absolute top-3 left-3 text-black inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb]">
-                                Delete Transaction
-                            </button>
-                        </form>
-                    </div>
-                    <p>Brand: <?= $transaction["brand"] ?></p>
-                    <p>Product: <?= $transaction["nama_produk"] ?></p>
-                    <p>Quantity: <?= $transaction["jumlah_produk"] ?></p>
-                    <p>Price: Rp <?= number_format($transaction["harga_produk"]) ?>,00</p>
-                    <p>Total Price: Rp <?= number_format($transaction["total_harga"]) ?>,00</p>
-                    <p>Date: <?= $transaction["tanggal_transaksi"] ?></p>
-                    <p>Status: <?= $transaction["status"] ?></p>
-                </div>
-            </div>
+                            <div>
+                                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900">Transaction Status</h5>
+                                
+                                <div class="relative">
+                                    <img class="rounded-t-lg w-full" src="img/<?= $transaction["product_image"] ?>" />
+                                    <form method="POST" action="controller.php">
+                                        <input type="hidden" name="transaction_id" value="<?= $transaction['id'] ?>">
+                                        <input type="hidden" name="user_id" value="<?= $user_id ?>">
+                                        <input type="submit" value="Delete Transaction" name="deleteTransaction" class="absolute top-3 left-3 text-black inline-flex items-center px-3 py-2 text-sm font-medium bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb]">
+                                    </form>
+                                    <form method="POST" action="controller.php">
+                                        <input type="hidden" name="transaction_id" value="<?= $transaction['id'] ?>">
+                                        <input type="hidden" name="user_id" value="<?= $user_id ?>">
+                                        <input type="hidden" name="produk_id" value="<?= $transaction['produk_id'] ?>">
+                                        <?php
+                                            if($transaction["status"] == "pending"){
+                                        ?>
+                                                <div class="flex flex-col">
+                                                <input type="submit" value="Approve" name="approveTransaction" class="absolute top-16 left-3 text-black inline-flex items-center px-3 py-2 text-sm font-medium bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb]">
+                                                </div>
+                                        <?php
+                                            }
+                                        ?>
+                                    </form>
+                                </div>
+                                <p>Brand: <?= $transaction["brand"] ?></p>
+                                <p>Product: <?= $transaction["nama_produk"] ?></p>
+                                <p>Quantity: <?= $transaction["jumlah_produk"] ?></p>
+                                <p>Price: Rp <?= number_format($transaction["harga_produk"]) ?>,00</p>
+                                <p>Total Price: Rp <?= number_format($transaction["total_harga"]) ?>,00</p>
+                                <p>Date: <?= $transaction["tanggal_transaksi"] ?></p>
+                                <p>Status: <?= $transaction["status"] ?></p>
+                                
+                            </div>
+                        </div>
 
-            <?php }
+            <?php 
+                    }
                 } else {
                     echo "<p class='text-center'>No user selected.</p>";
                 }

@@ -13,17 +13,17 @@
                     <img src="img/carousel_banner_2.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                 </div>
                 <!-- Item 3 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <!-- <div class="hidden duration-700 ease-in-out" data-carousel-item>
                     <img src="img/sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
+                </div> -->
                 <!-- Item 4 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <!-- <div class="hidden duration-700 ease-in-out" data-carousel-item>
                     <img src="img/sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
+                </div> -->
                 <!-- Item 5 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <!-- <div class="hidden duration-700 ease-in-out" data-carousel-item>
                     <img src="img/sale_banner.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -42,6 +42,8 @@
                     $role = "";
                     foreach($result as $row){
                 ?>
+                <form action="controller.php" method="POST">
+                    <input type="hidden" name="produkID" value="<?=$row['id']?>">
                     <div class="w-full bg-white border border-gray-200 rounded-lg shadow bg-[#beaecb] hover-product">
                         <div class="hover-img">
                             <img class="rounded-t-lg" src="img/<?=$row["product_image"]?>" alt="" />
@@ -50,22 +52,22 @@
                                 if(isset($_SESSION["role"])){
                                     if($_SESSION["role"] != "admin"){
                             ?>
-                                        <button product-id="<?=$row['id']?>" class="addButton text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                                        <button type="submit" name="addToCart" class="text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
                                             Add to cart
                                         </button>
                             <?php  
                                     }else{
                             ?>
-                                        <a href="editproduct.php?editID=<?=$row['id']?>" class="text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                                        <a href="editproduct.php?editID=<?=$row['id']?>" class="text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
                                             Edit Product
                                         </a>
                             <?php
                                     }      
                                 }else{
                             ?>
-                                    <button product-id="<?=$row['id']?>" class="addButton text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
-                                        Add to cart
-                                    </button>
+                                        <button type="submit" name="addToCart" class="text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb] product-button">
+                                            Add to cart
+                                        </button>
                             <?php
                                 }
                             ?>
@@ -73,9 +75,10 @@
                         <div class="p-5">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900"><?=$row["brand"]?></h5>
                             <p class="mb-3 font-normal text-gray-700"><?=$row["name"]?></p>
-                            <p class="mb-3 font-normal text-gray-700">Rp. <?=$row["harga"]?>,00</p>
+                            <p class="mb-3 font-normal text-gray-700">Rp. <?=number_format($row["harga"])?>,00</p>
                         </div>
                     </div>
+                </form>
                 <?php
                     }
                 ?>
@@ -95,24 +98,4 @@
             </div>
         </section>
     </main>
-
-    <script>
-        var product_id = document.getElementsByClassName("addButton");
-        for(var i = 0; i<product_id.length; i++){
-            product_id[i].addEventListener("click", function(event){
-                var target = event.target;
-                var id = this.getAttribute("product-id");
-                var xml = new XMLHttpRequest();
-                xml.onreadystatechange = function(){
-                    if(this.readyState == 4 && this.status == 200){
-                        alert(this.responseText);
-                    }
-                }
-
-                xml.open("GET", "controller.php?addCartID="+id, true);
-                xml.send();
-            });
-        }
-    </script>
-
     <?php include_once('footer.php'); ?>
