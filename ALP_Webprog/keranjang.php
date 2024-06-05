@@ -19,6 +19,10 @@ $pending_transactions = array_filter($all_transactions, function($transaction) {
         <!-- shopping cart text -->
         <div class="text-cart items-center lg:justify-between lg:text-center pb-4 lg:pb-12">
             <h1 class="text-3xl lg:text-4xl font-bold">Shopping Cart</h1>
+            <a href="https://api.whatsapp.com/send?phone=6282349516937" target="_blank" class="mt-4 text-black inline-flex items-center px-3 py-2 text-sm font-medium text-center bg-[#f3bae5] rounded-lg hover:bg-[#f48fdb]">
+                Admin's Whatsapp
+            </a>
+            <p class="mt-2">Contact Admin to checkout</p>
         </div>
 
         <!-- shopping cart details -->
