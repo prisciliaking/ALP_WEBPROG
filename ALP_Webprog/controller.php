@@ -12,12 +12,12 @@
         return $conn;
     }
 
-    //function untuk close connection
+    //Function untuk close connection
     function my_closeDB($conn){
         mysqli_close($conn);
     }
 
-    //Function untuk register
+    //Function untuk register (CREATE User)
     function createUser(){
         $username = $_POST["username"];
         $password = $_POST["password"];
@@ -54,6 +54,7 @@
         }
     }
 
+    //Function untuk login
     function loginUser(){
         $username = $_POST["username"];
         $password = $_POST["password"];
@@ -62,7 +63,7 @@
             $sql_query = "SELECT * FROM `users` WHERE username = '$username' AND password = '$password'";
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
             $rows = mysqli_fetch_assoc($result);
-            //cek result kosong atau tidak, num_rows jumlah baris di result
+            //Cek result kosong atau tidak, num_rows adalah jumlah baris di result
             if($result -> num_rows == 1){
                 $_SESSION['user_id'] = $rows['id'];
                 $_SESSION['username'] = $username;
@@ -80,40 +81,29 @@
         my_closeDB($conn);
     }
 
-    // ini cuma bisa dipake buat delete users doang gak bisa role admin
-    function deleteUser() {
-        if ($_SESSION["role"] == "user") {
-            $username = $_SESSION["username"];
-            $conn = my_connectDB();
-    
-            if ($conn) {
-                $sql_query = "DELETE FROM users WHERE username = ?";
-                $stmt = mysqli_prepare($conn, $sql_query);
-                if ($stmt) {
-                    mysqli_stmt_bind_param($stmt, "s", $username);
-                    if (mysqli_stmt_execute($stmt)) {
-                        session_unset();
-                        session_destroy();
-                        echo "<script>alert('Success to delete users');</script>";
-                        return true;
-                    } else {
-                        echo "<script>alert('Failed to delete users');</script>";
-                    }
-                    mysqli_stmt_close($stmt);
-                } else {
-                    die("Failed to prepare SQL query: " . mysqli_error($conn));
-                }
-                my_closeDB($conn);
-            } else {
-                echo "Error connecting to database";
+    //Ini buat ngeliat diuser list, admin bisa ngeliat user yang punya role user (READ user with "user" role)
+    function readUsers() {
+        $conn = my_connectDB();
+        $alldata = array();
+        // ngecek user yang diambil cuma yang ada role di user doang
+        $sql_query = "SELECT * FROM `users` WHERE `role` = 'user'";
+        $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data["id"] = $row["id"];
+                $data["username"] = $row["username"];
+                $data["password"] = $row["password"];
+                $data["role"] = $row["role"];
+                array_push($alldata, $data);
             }
         } else {
-            echo "<script>alert('users is not logged in or does not have permission');</script>";
         }
-        return false;
+    
+        my_closeDB($conn);
+        return $alldata;
     }
 
-    //Function to update users n admin information
+    //Function to update users n admin information (UPDATE user)
     function updateUser() {
         if (isset($_SESSION["username"])) {
             $current_username = $_SESSION["username"];
@@ -155,21 +145,40 @@
         }
     }
 
-    function getProductAmount(){
-        $conn = my_connectDB();
-
-        $sql_query = "SELECT * FROM `produk`";
-        $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
-
-        if($result -> num_rows > 0){
-            $num_of_rows = mysqli_num_rows( $result );
-            return $num_of_rows;
-        }else{
-            
+    //Ini cuma bisa dipake buat delete users doang gak bisa role admin (DELETE user with "user" role)
+    function deleteUser() {
+        if ($_SESSION["role"] == "user") {
+            $username = $_SESSION["username"];
+            $conn = my_connectDB();
+    
+            if ($conn) {
+                $sql_query = "DELETE FROM users WHERE username = ?";
+                $stmt = mysqli_prepare($conn, $sql_query);
+                if ($stmt) {
+                    mysqli_stmt_bind_param($stmt, "s", $username);
+                    if (mysqli_stmt_execute($stmt)) {
+                        session_unset();
+                        session_destroy();
+                        echo "<script>alert('Success to delete users');</script>";
+                        return true;
+                    } else {
+                        echo "<script>alert('Failed to delete users');</script>";
+                    }
+                    mysqli_stmt_close($stmt);
+                } else {
+                    die("Failed to prepare SQL query: " . mysqli_error($conn));
+                }
+                my_closeDB($conn);
+            } else {
+                echo "Error connecting to database";
+            }
+        } else {
+            echo "<script>alert('users is not logged in or does not have permission');</script>";
         }
-        my_closeDB($conn);
+        return false;
     }
 
+    //Function untuk READ produk
     function readProducts(){
         $conn = my_connectDB();
         $allData = array();
@@ -192,13 +201,11 @@
                         alert('Products not found');
                     </script>";
         }
-
         my_closeDB($conn);
         return $allData;
     }
 
-    
-
+    //Function untuk CREATE produk
     function uploadProduct(){
         $conn = my_connectDB();
 
@@ -225,26 +232,30 @@
         }
     }
 
-    //If you want to upload a file
+    //Function to upload an image
     function uploadImage(){
         $photo = $_FILES['product_image'];
+        //Mengambil atribut2 dari file yang diupload krn $_FILES[] itu return array
         $fileName = $photo['name'];
         $fileSize = $photo['size'];
         $error = $photo['error'];
         $tempName = $photo['tmp_name'];
 
         //Check if there is any image
+        //Error ada bermacam2 kalau error 4 itu berarti tidak ada file yg masuk
         if($error == 4){
             return false;
         }
 
-        //Check if the submission is an image
+        //Check if the submission is an image 
         $validExtension = ["jpg", "jpeg", "png"];
         //Get the submission's extension
+        //Di-explode/dipecah tandanya wkt ada titik
         $fileExtension = explode('.', $fileName);
         $fileExtension = strtolower(end($fileExtension));
 
         //Function to check if a String exists inside an array
+        //Ngecek apakah extension tadi itu ada di dalam array extension yg valid
         if(!in_array($fileExtension, $validExtension)){
             echo "<script>
                         alert('Only pictures/images with jpg/jpeg/png extensions are allowed!');
@@ -270,8 +281,7 @@
     }
 
 
-    // ini gunanya buat ambil product sesuai dengan id user, jadi 
-    // selain id user yg dipilih gk bakalan keluar itu product user lain
+    //Function untuk mengambil produk yang mau diedit sesuai dengan ID produk yg ada di button yg dipencet
     function getProductWithID($editID){
         $data = array();
         if($editID > 0){
@@ -279,7 +289,7 @@
 
             $sql_query = "SELECT * FROM `produk` WHERE id = " . $editID;
             $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
-            //result berupa array
+            //Result berupa array
 
             if($result -> num_rows > 0){
                 while($row = $result -> fetch_assoc()){
@@ -297,8 +307,11 @@
     }
 
 
-    // ini buat update product seperti biasa ygy
+    //Ini buat UPDATE product seperti biasa ygy
     function updateProduct($id, $brand, $name, $harga, $image, $oldImage){
+        //Kalau tadi user nggak submit gambar, $image akan diset sama dgn $oldImage
+        //Kalau $image sama dgn $oldImage, maka gambar tersebut akan dipake by default
+
         if($id!="" && $brand!="" && $name!="" && $harga!="" && $image!=""){
             if($image != $oldImage){
                 $oldImage = "img/".$oldImage;
@@ -328,13 +341,14 @@
     }
 
 
-    // ini cuma delete product biasa 
+    //Ini cuma DELETE product biasa 
     function deleteProduct($deleteID, $oldImage){
         $conn = my_connectDB();
 
         if($conn != NULL){
             $oldImage = "img/".$oldImage;
             if(file_exists( $oldImage)){
+                //unlink() untuk sekalian hapus file gambar dari produk tsb di folder img
                 unlink($oldImage);
             }else{
                 echo "<script>
@@ -349,30 +363,10 @@
         }
     }
 
-    // ini buat ngeliat diuser list, admin bisa ngeliat user yang punya role user
-    function readUsers() {
-        $conn = my_connectDB();
-        $alldata = array();
-        // ngecek user yang diambil cuma yang ada role di user doang
-        $sql_query = "SELECT * FROM `users` WHERE `role` = 'user'";
-        $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $data["id"] = $row["id"];
-                $data["username"] = $row["username"];
-                $data["password"] = $row["password"];
-                $data["role"] = $row["role"];
-                array_push($alldata, $data);
-            }
-        } else {
-        }
     
-        my_closeDB($conn);
-        return $alldata;
-    }
 
 
-    // ini buat ngambil transaksi yang dmiliki oleh user dicek berdasarkan idnya
+    //Ini buat ngambil transaksi yang dmiliki oleh user dicek berdasarkan idnya (READ transaction)
     function readTransaction($id) {
         $transactions = array();
         
@@ -421,10 +415,11 @@
     }
 
 
-    // ini buat add cart ke user berdasarkan idnya
+    //Ini buat add cart ke user berdasarkan idnya
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart']) && isset($_POST['produkID'])){
+        //Kalau user blom login, dibalikin ke home
         if(!isset($_SESSION['user_id'])){
-            header("Location: home.php");
+            header("Location: home.php?message=PLEASE_LOGIN_FIRST");
             exit();
         }
 
@@ -464,17 +459,24 @@
         }
     }
 
+    //Function untuk DELETE transaction
     function deleteTransaction($transaction_id, $user_id) {
         $conn = my_connectDB();
+
+        //Masukkan query secara umum
         $sql_query = "DELETE FROM transaksi WHERE id = ? AND user_id = ?";
     
+        //Query disiapkan terlebih dahulu krn masih pake placeholder di parameternya
         if ($stmt = $conn->prepare($sql_query)) {
+            //Masukkan parameter ke dalam query tersebut
+            //ii itu data type dari kedua parameter yg dimasukkan i:integer, dll
             $stmt->bind_param("ii", $transaction_id, $user_id);
             $stmt->execute();
     
-            // Debugging output to check query execution
+            //Kirim pesan error ke server, menunjukkan jumlah baris yg ter'dampak' atau kena sm query td
             error_log("SQL query executed: " . $stmt->affected_rows . " rows affected.");
     
+            //Kalau ada row yg kedelete berarti berhasil
             if ($stmt->affected_rows > 0) {
                 $result = true;
             } else {
@@ -490,6 +492,7 @@
         return $result;
     }
 
+    //Function untuk bagian purchase approval by admin
     function changeTransactionStatus($userID, $productID){
         $conn = my_connectDB();
         if($userID!="" && $productID!=""){
@@ -511,21 +514,15 @@
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteTransaction']) && isset($_POST['transaction_id']) && isset($_POST['user_id'])) {
-        // Retrieve transaction_id and user_id from POST data and convert them to integers for security
+        //Supaya lbh pasti transaction_id dan user_id diubah jd int trs dimasukkin ke variabel penampung
         $transaction_id = intval($_POST['transaction_id']);
         $user_id = intval($_POST['user_id']);
     
-        // Debugging output to check values (this will be logged)
-        error_log("Attempting to delete transaction ID: $transaction_id for user ID: $user_id");
-    
-        // Call the deleteTransaction function to delete the transaction with the provided IDs
+        //Memanggil function untuk DELETE transaksi dan return hasilnya berhasil/tidak
         $deleteSuccess = deleteTransaction($transaction_id, $user_id);
     
-        // Check if the transaction was deleted successfully
+        //Mengecek apakah DELETE tadi berhasil/tidak
         if ($deleteSuccess) {
-            // Log success message
-            error_log("Transaction ID: $transaction_id for user ID: $user_id deleted successfully.");
-    
             // Redirect to the same page with a success message
             header("Location: usertransaksi.php?user_id=" . urlencode($user_id) . "&message=Transaction deleted successfully");
             exit(); // Exit the script after redirecting
