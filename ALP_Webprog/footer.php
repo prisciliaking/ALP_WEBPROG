@@ -13,7 +13,7 @@
                     <a href="#"><ion-icon name="logo-facebook" class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
                     <a href="#"><ion-icon name="mail-outline" class="text-4xl mr-6 lg:mr-7 hover:text-violet-900"></ion-icon></a>
                 </div>
-                <div class="mx-auto mb-8 lg:mb-5">
+                <div class="mx-auto mb-8">
                     <div class="max-w-14 mx-auto">
                         <img src="https://i.ibb.co.com/LZL0FqD/LOGO-YUPI-CARE-ALP.png" alt="Logo">
                     </div>
