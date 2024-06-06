@@ -23,6 +23,12 @@
     align-items: center;
 }
 
+.transaction-edit-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .hover-product:hover .product-button{
     visibility: visible;
 }
